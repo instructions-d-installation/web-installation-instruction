@@ -20,10 +20,35 @@
   <p>{{ prop.description }}</p>
   <fieldset>
   {% for elem in prop.enum %}
-      <label>
+      <label for="{{ elem.value }}">
       <input type="radio" name="{{ name }}" id={{ elem.value }} {{ "checked" if prop.default == elem.value }} />
       {{ elem.title}} - {{ elem.description }}
   </label>
   {% endfor %}
   </fieldset>
+{% endmacro %}
+
+
+{% macro switch(prop, name=prop.title) %}
+  <h4>{{ prop.title }}</h4>
+  <fieldset>
+    <label for="{{ name }}">
+      <input name="{{ name }}" id="{{ name }}" value="{{ name }}" type="checkbox" role="switch" {{ "checked" if prop.default }} />
+      {{ prop.description }}
+    </label>
+  </fieldset>
+{% endmacro %}
+
+
+{% macro text(prop, name=prop.title) %}
+  <h4>{{ prop.title }}</h4>
+  <p>{{ prop.description }}</p>
+  <input type="text" name="{{ name }}" id="{{ name }}" placeholder="{{ prop.default }}" aria-label="Text" />
+{% endmacro %}
+
+
+{% macro number(prop, name=prop.title) %}
+  <h4>{{ prop.title }}</h4>
+  <p>{{ prop.description }}</p>
+  <input type="number" name="{{ name }}" id="{{ name }}" placeholder="{{ prop.default }}" aria-label="Number" />
 {% endmacro %}

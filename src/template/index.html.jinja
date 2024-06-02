@@ -37,6 +37,9 @@
     <main class="container">
 
       <form>
+        {{ forms.number(properties.mynum, "mynum") }}
+        {{ forms.text(properties.mystr, "mystr") }}
+        {{ forms.switch(properties.mybool, "mybool") }}
         {{ forms.radio(properties.mychoice, "mychoice") }}
         <input type="submit" value="Submit" />
       </form>
