@@ -1,5 +1,4 @@
 <!doctype html>
-
 {#
   Copyright 2024 Adam McKellar, Kanushka Gupta, Timo Ege
 
@@ -16,6 +15,8 @@
   limitations under the License. 
 #}
 
+{% import 'forms.html.jinja' as forms %}
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -29,9 +30,17 @@
     <meta name="description" content={{ description }} />
   </head>
   <body>
-    <main class="container">
+    <header class="container">
       <h1>{{ title }}</h1>
       <p>{{ description }}</p>
+    </header>
+    <main class="container">
+
+      <form>
+        {{ forms.radio(properties.mychoice, "mychoice") }}
+        <input type="submit" value="Submit" />
+      </form>
+
     </main>
   </body>
 </html>
