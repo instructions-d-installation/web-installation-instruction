@@ -31,8 +31,10 @@
   </head>
   <body>
     <header class="container">
-      <h1>{{ title }}</h1>
-      <p>{{ description }}</p>
+      <hgroup>
+        <h1>{{ title }}</h1>
+        <p>{{ description }}</p>
+      </hgroup>
     </header>
     <main class="container">
 
@@ -43,7 +45,6 @@
             {{ forms.number(prop) }}
           {% elif prop.type == "string" %}
             {{ forms.text(prop) }}
-            <p>here</p>
           {% elif prop.type == "boolean" %}
             {{ forms.switch(prop) }}
           {% elif prop.type == "enum" %}
@@ -62,5 +63,18 @@
       </form>
 
     </main>
+    <footer class="container">
+      <small>
+        <p>
+          This website is generated using 
+          <a href="https://github.com/instructions-d-installation/web-installation-instruction" class="secondary">web-installation-instruction</a>, 
+          which is under 
+          <a href="https://github.com/instructions-d-installation/web-installation-instruction/blob/main/LICENSE" class="secondary">Apache-2.0</a>,
+          and utilizes 
+          <a href="https://picocss.com/" class="secondary">Pico CSS</a>, licensed under 
+          <a href="https://github.com/picocss/pico/blob/main/LICENSE.md" class="secondary">MIT</a>.
+        </p>
+      </small>
+    </footer>
   </body>
 </html>

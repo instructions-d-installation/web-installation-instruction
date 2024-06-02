@@ -16,14 +16,16 @@
 #}
 
 {% macro radio(prop) %}
-  <h4>{{ prop.title }}</h4>
-  <p>{{ prop.description }}</p>
+  <hgroup>
+    <h4>{{ prop.title }}</h4>
+    <p>{{ prop.description }}</p>
+  </hgroup>
   <fieldset>
   {% for elem in prop.enum %}
       <label for="{{ elem.key }}">
-      <input type="radio" name="{{ prop.key }}" id={{ elem.key }} {{ "checked" if prop.default == elem.key }} />
-      {{ elem.title}} - {{ elem.description }}
-  </label>
+        <input type="radio" name="{{ prop.key }}" id={{ elem.key }} {{ "checked" if prop.default == elem.key }} />
+        {{ elem.title}} - {{ elem.description }}
+    </label>
   {% endfor %}
   </fieldset>
 {% endmacro %}
@@ -41,14 +43,18 @@
 
 
 {% macro text(prop) %}
-  <h4>{{ prop.title }}</h4>
-  <p>{{ prop.description }}</p>
+  <hgroup>
+    <h4>{{ prop.title }}</h4>
+    <p>{{ prop.description }}</p>
+  </hgroup>
   <input type="text" name="{{ prop.key }}" id="{{ prop.key }}" placeholder="{{ prop.default }}" aria-label="Text" />
 {% endmacro %}
 
 
 {% macro number(prop) %}
-  <h4>{{ prop.title }}</h4>
-  <p>{{ prop.description }}</p>
+  <hgroup>
+    <h4>{{ prop.title }}</h4>
+    <p>{{ prop.description }}</p>
+  </hgroup>
   <input type="number" name="{{ prop.key }}" id="{{ prop.key }}" placeholder="{{ prop.default }}" aria-label="Number" />
 {% endmacro %}
