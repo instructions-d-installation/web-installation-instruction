@@ -37,10 +37,26 @@
     <main class="container">
 
       <form>
-        {{ forms.number(properties.mynum, "mynum") }}
-        {{ forms.text(properties.mystr, "mystr") }}
-        {{ forms.switch(properties.mybool, "mybool") }}
-        {{ forms.radio(properties.mychoice, "mychoice") }}
+
+        {% for key, prop in properties.items() %}
+          {% if prop.type == "number" %}
+            {{ forms.number(prop) }}
+          {% elif prop.type == "string" %}
+            {{ forms.text(prop) }}
+          {% elif prop.type == "boolean" %}
+            {{ forms.switch(prop) }}
+          {% elif prop.type == "enum" %}
+            {{ forms.radio(prop) }}
+          {% else %}
+            <p>
+              Error occured @
+              {{ prop | pprint }}
+              with type
+              {{ prop.type | pprint }}
+            </p>
+          {% endif %}
+        {% endfor %}
+
         <input type="submit" value="Submit" />
       </form>
 
