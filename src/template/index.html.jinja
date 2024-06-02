@@ -43,6 +43,7 @@
             {{ forms.number(prop) }}
           {% elif prop.type == "string" %}
             {{ forms.text(prop) }}
+            <p>here</p>
           {% elif prop.type == "boolean" %}
             {{ forms.switch(prop) }}
           {% elif prop.type == "enum" %}
