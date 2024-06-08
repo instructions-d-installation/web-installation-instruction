@@ -23,11 +23,15 @@
   <fieldset>
   {% for elem in prop.enum %}
       <label for="{{ elem.key }}">
-        <input type="radio" name="{{ prop.key }}" id={{ elem.key }} {{ "checked" if prop.default == elem.key }} />
+        <input type="radio" name="{{ prop.key }}" id={{ elem.key }} onchange="render()" {{ "checked" if prop.default == elem.key }} />
         {{ elem.title}} - {{ elem.description }}
     </label>
   {% endfor %}
   </fieldset>
+  <script>
+    input.set("{{ prop.key }}", "{{ prop.default }}")
+    radio.add("{{ prop.key }}")
+  </script>
 {% endmacro %}
 
 
@@ -35,10 +39,14 @@
   <h4>{{ prop.title }}</h4>
   <fieldset>
     <label for="{{ prop.key }}">
-      <input name="{{ prop.key }}" id="{{ prop.key }}" value="{{ prop.key }}" type="checkbox" role="switch" {{ "checked" if prop.default }} />
+      <input name="{{ prop.key }}" id="{{ prop.key }}" value="{{ prop.key }}" type="checkbox" role="switch" onchange="render()" {{ "checked" if prop.default }} />
       {{ prop.description }}
     </label>
   </fieldset>
+  <script>
+    input.set("{{ prop.key }}", {{ "true" if prop.default else "false" }})
+    bool.add("{{ prop.key }}")
+  </script>
 {% endmacro %}
 
 
@@ -47,7 +55,10 @@
     <h4>{{ prop.title }}</h4>
     <p>{{ prop.description }}</p>
   </hgroup>
-  <input type="text" name="{{ prop.key }}" id="{{ prop.key }}" placeholder="{{ prop.default }}" aria-label="Text" />
+  <input type="text" name="{{ prop.key }}" id="{{ prop.key }}" placeholder="{{ prop.default }}" aria-label="Text" onchange="render()" />
+  <script>
+    input.set("{{ prop.key }}", `{{ prop.default }}`)
+  </script>
 {% endmacro %}
 
 
@@ -56,5 +67,8 @@
     <h4>{{ prop.title }}</h4>
     <p>{{ prop.description }}</p>
   </hgroup>
-  <input type="number" name="{{ prop.key }}" id="{{ prop.key }}" placeholder="{{ prop.default }}" aria-label="Number" />
+  <input type="number" name="{{ prop.key }}" id="{{ prop.key }}" placeholder="{{ prop.default }}" aria-label="Number" onchange="render()" />
+  <script>
+    input.set("{{ prop.key }}", {{ prop.default }})
+  </script>
 {% endmacro %}

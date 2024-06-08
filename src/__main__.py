@@ -18,11 +18,19 @@ import os
 from jinja2 import Environment, Template, FileSystemLoader, select_autoescape
 
 from installation_instruction.installation_instruction import InstallationInstruction
+from installation_instruction.helpers import _split_string_at_delimiter
 
 
 def main():
-    install = InstallationInstruction.from_file("install.cfg")
+    with open("install.cfg", "r") as f:
+        config_string = f.read()
+
+    (_, template) = _split_string_at_delimiter(config_string)
+
+    install = InstallationInstruction(config_string)
     schema = install.parse_schema()
+
+    schema["__web_template__"] = template
 
     if not os.path.exists("public"):
         os.makedirs("public")

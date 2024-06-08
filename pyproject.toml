@@ -29,5 +29,5 @@ classifiers = [
 ]
 dependencies = [
     "jinja2",
-    "installation-instruction"
+    "installation-instruction = 0.3.0"
 ]

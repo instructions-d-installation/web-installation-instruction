@@ -28,6 +28,15 @@
     />
     <title>{{ title }}</title>
     <meta name="description" content={{ description }} />
+
+    <script src="https://cdn.jsdelivr.net/npm/nunjucks@3/browser/nunjucks.min.js"></script>
+
+    <script>
+      let input = new Map();
+      let radio = new Set();
+      let bool = new Set();
+    </script>
+
   </head>
   <body>
     <header class="container">
@@ -58,9 +67,10 @@
             </p>
           {% endif %}
         {% endfor %}
-
-        <input type="submit" value="Submit" />
       </form>
+
+      <h4>Instructions</h4>
+      <p id="output"></p>
 
     </main>
     <footer class="container">
@@ -76,5 +86,33 @@
         </p>
       </small>
     </footer>
+
+    <script>
+      nunjucks.configure({ autoescape: true, trimBlocks: true, lstripBlocks: true });
+      nunjucks.installJinjaCompat()
+
+      let template = nunjucks.compile(`{{ __web_template__ }}`);
+
+      function render() {
+        for (const key of input.keys()) {
+          let val = input.get(key);
+          if (radio.has(key)) {
+            val = document.querySelector(`input[name="${key}"]:checked`).id;
+          } else if (bool.has(key)) {
+            val = document.getElementById(key).checked
+          } else {
+            val = document.getElementById(key).value || val;
+          }
+          console.log(key)
+          console.log(input.get("mybool"))
+          input.set(key, val);
+        }
+        let render = template.render(Object.fromEntries(input.entries()));
+        document.getElementById("output").innerHTML = render;
+      }
+
+      render()
+    </script>
+
   </body>
 </html>
