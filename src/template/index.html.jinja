@@ -93,15 +93,17 @@
 
       let template = nunjucks.compile(`{{ __web_template__ }}`);
 
+      let default_input = structuredClone(input);
+
       function render() {
         for (const key of input.keys()) {
-          let val = input.get(key);
+          let val;
           if (radio.has(key)) {
             val = document.querySelector(`input[name="${key}"]:checked`).id;
           } else if (bool.has(key)) {
             val = document.getElementById(key).checked
           } else {
-            val = document.getElementById(key).value || val;
+            val = document.getElementById(key).value || default_input.get(key);
           }
           console.log(key)
           console.log(input.get("mybool"))
