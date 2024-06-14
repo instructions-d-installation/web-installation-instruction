@@ -18,6 +18,7 @@ from typing_extensions import Annotated
 
 from jinja2 import Environment, Template, FileSystemLoader, select_autoescape
 import typer
+from rich import print
 
 from installation_instruction.installation_instruction import InstallationInstruction
 from installation_instruction.helpers import _split_string_at_delimiter
@@ -55,6 +56,8 @@ def main(
 
     with open(output_file_path, "x") as f:
         f.write(result)
+
+    print("[green]HTML generated successfully![/green]")
 
 def run_cli():
     typer.run(main)
