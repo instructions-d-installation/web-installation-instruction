@@ -29,5 +29,7 @@ classifiers = [
 ]
 dependencies = [
     "jinja2",
-    "installation-instruction = 0.3.0"
+    "installation-instruction == 0.3.0"
 ]
+[project.scripts]
+ibi-build-html = "web_installation_instruction.__main__:main"

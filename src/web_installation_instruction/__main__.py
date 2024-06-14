@@ -22,6 +22,9 @@ from installation_instruction.helpers import _split_string_at_delimiter
 
 
 def main():
+    src_path = os.path.dirname(os.path.realpath(__file__))
+    template_path = f"{src_path}/template"
+
     with open("install.cfg", "r") as f:
         config_string = f.read()
 
@@ -39,7 +42,7 @@ def main():
             os.remove("public/index.html")
 
     env = Environment(
-        loader=FileSystemLoader(["src/template/", "template"]),
+        loader=FileSystemLoader([template_path]),
         autoescape=select_autoescape()
     )
 
