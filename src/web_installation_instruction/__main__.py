@@ -29,33 +29,31 @@ def main(
 ):
     src_path = os.path.dirname(os.path.realpath(__file__))
     template_path = f"{src_path}/template"
-
-    with open(input, "r") as f:
-        config_string = f.read()
-
-    (_, template) = _split_string_at_delimiter(config_string)
-
-    install = InstallationInstruction(config_string)
-    schema = install.parse_schema()
-
-    schema["__web_template__"] = template
+    output_file_path = f"{output}/index.html"
 
     if not os.path.exists(output):
         os.makedirs(output)
     else:
-        if os.path.exists(f"{output}/index.html"):
-            os.remove(f"{output}/index.html")
+        if os.path.exists(output_file_path):
+            os.remove(output_file_path)
 
     env = Environment(
         loader=FileSystemLoader([template_path]),
         autoescape=select_autoescape()
     )
-
     index = env.get_template("index.html.jinja")
 
+
+    with open(input, "r") as f:
+        config_string = f.read()
+
+    (_, template) = _split_string_at_delimiter(config_string)
+    install = InstallationInstruction(config_string)
+    schema = install.parse_schema()
+    schema["__web_template__"] = template
     result = index.render(schema)
 
-    with open(f"{output}/index.html", "x") as f:
+    with open(output_file_path, "x") as f:
         f.write(result)
 
 def run_cli():
