@@ -14,18 +14,23 @@
 
 
 import os
+from typing_extensions import Annotated
 
 from jinja2 import Environment, Template, FileSystemLoader, select_autoescape
+import typer
 
 from installation_instruction.installation_instruction import InstallationInstruction
 from installation_instruction.helpers import _split_string_at_delimiter
 
 
-def main():
+def main(
+    input: Annotated[str, typer.Option("--input", "-i" , help="Path to config file.")] = "./install.cfg",
+    output: Annotated[str, typer.Option("--output", "-o", help="Path to output directory.")] = "./public",
+):
     src_path = os.path.dirname(os.path.realpath(__file__))
     template_path = f"{src_path}/template"
 
-    with open("install.cfg", "r") as f:
+    with open(input, "r") as f:
         config_string = f.read()
 
     (_, template) = _split_string_at_delimiter(config_string)
@@ -35,11 +40,11 @@ def main():
 
     schema["__web_template__"] = template
 
-    if not os.path.exists("public"):
-        os.makedirs("public")
+    if not os.path.exists(output):
+        os.makedirs(output)
     else:
-        if os.path.exists("public/index.html"):
-            os.remove("public/index.html")
+        if os.path.exists(f"{output}/index.html"):
+            os.remove(f"{output}/index.html")
 
     env = Environment(
         loader=FileSystemLoader([template_path]),
@@ -50,9 +55,11 @@ def main():
 
     result = index.render(schema)
 
-    with open("public/index.html", "x") as f:
+    with open(f"{output}/index.html", "x") as f:
         f.write(result)
 
+def run_cli():
+    typer.run(main)
 
 if __name__ == "__main__":
-    main()
+    run_cli()
