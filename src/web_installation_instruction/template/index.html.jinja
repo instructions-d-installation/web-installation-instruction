@@ -70,19 +70,26 @@
       </form>
 
       <h4>Instructions</h4>
-      <p id="output"></p>
+      <div>
+        <pre>
+          <Code id="output"></Code>
+        </pre>
+      </div>
+      <button class="secondary" onclick="copy_to_clipboard()" style="width: 100%;">Copy</button>
 
     </main>
     <footer class="container">
       <small>
         <p>
-          This website is generated using 
+          This website was generated using 
           <a href="https://github.com/instructions-d-installation/web-installation-instruction" class="secondary">web-installation-instruction</a>, 
           which is under 
           <a href="https://github.com/instructions-d-installation/web-installation-instruction/blob/main/LICENSE" class="secondary">Apache-2.0</a>,
           and utilizes 
           <a href="https://picocss.com/" class="secondary">Pico CSS</a>, licensed under 
-          <a href="https://github.com/picocss/pico/blob/main/LICENSE.md" class="secondary">MIT</a>.
+          <a href="https://github.com/picocss/pico/blob/main/LICENSE.md" class="secondary">MIT</a>, and
+          <a href="https://mozilla.github.io/nunjucks/" class="secondary">Nunjucks</a>, licensed under
+          <a href="https://github.com/mozilla/nunjucks/blob/master/LICENSE" class="secondary">BSD-2-Clause</a>.
         </p>
       </small>
     </footer>
@@ -95,6 +102,8 @@
 
       let default_input = structuredClone(input);
 
+      let output;
+
       function render() {
         for (const key of input.keys()) {
           let val;
@@ -105,12 +114,14 @@
           } else {
             val = document.getElementById(key).value || default_input.get(key);
           }
-          console.log(key)
-          console.log(input.get("mybool"))
           input.set(key, val);
         }
-        let render = template.render(Object.fromEntries(input.entries()));
-        document.getElementById("output").innerHTML = render;
+        output = template.render(Object.fromEntries(input.entries()));
+        document.getElementById("output").innerHTML = output;
+      }
+
+      function copy_to_clipboard() {
+        navigator.clipboard.writeText(output);
       }
 
       render()
