@@ -30,7 +30,7 @@ classifiers = [
 dependencies = [
     "jinja2",
     "typer",
-    "installation-instruction == 0.3.0"
+    "installation-instruction >= 0.4.0"
 ]
 [project.scripts]
 ibi-build-html = "web_installation_instruction.__main__:run_cli"

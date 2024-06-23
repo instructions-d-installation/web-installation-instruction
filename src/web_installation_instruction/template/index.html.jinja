@@ -75,7 +75,7 @@
           <Code id="output"></Code>
         </pre>
       </div>
-      <button class="secondary" onclick="copy_to_clipboard()" style="width: 100%;">Copy</button>
+      <button id="copybtn" class="secondary" onclick="copy_to_clipboard()" style="width: 100%;">Copy</button>
 
     </main>
     <footer class="container">
@@ -98,7 +98,13 @@
       nunjucks.configure({ autoescape: true, trimBlocks: true, lstripBlocks: true });
       nunjucks.installJinjaCompat()
 
-      let template = nunjucks.compile(`{{ __web_template__ }}`);
+      const raise_regex = /\[\[ERROR\]\](.*?)\[\[\/ERROR\]\]/g;
+
+      {% raw %}
+      const raise_macro = "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}";
+      {% endraw %}
+
+      let template = nunjucks.compile(raise_macro + `{{ __web_template__ }}`);
 
       let default_input = structuredClone(input);
 
@@ -117,7 +123,16 @@
           input.set(key, val);
         }
         output = template.render(Object.fromEntries(input.entries()));
+        let errmsg = raise_regex.exec(output)?.[1];
+        output = errmsg || output;
         document.getElementById("output").innerHTML = output;
+
+        let copy_btn = document.getElementById("copybtn");
+        if (errmsg) {
+          copy_btn.setAttribute("disabled", "disabled");
+        } else {
+          copy_btn.removeAttribute("disabled");
+        }
       }
 
       function copy_to_clipboard() {
