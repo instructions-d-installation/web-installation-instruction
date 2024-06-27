@@ -1,0 +1,295 @@
+<!doctype html>
+
+
+
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
+    <title>Hello World</title>
+    <meta name="description" content=Hello World Example for Web Installation Instructions />
+
+    <script src="https://cdn.jsdelivr.net/npm/nunjucks@3/browser/nunjucks.min.js"></script>
+
+    <script>
+      let input = new Map();
+      let radio = new Set();
+      let bool = new Set();
+    </script>
+
+  </head>
+  <body>
+    <header class="container">
+      <hgroup>
+        <h1>Hello World</h1>
+        <p>Hello World Example for Web Installation Instructions</p>
+      </hgroup>
+    </header>
+    <main class="container">
+
+      <form>
+
+        
+          
+            
+  <hgroup>
+    <h4>My Number</h4>
+    <p>A number to be echoed back.</p>
+  </hgroup>
+  <input type="number" name="mynum" id="mynum" placeholder="2024" aria-label="Number" onchange="render()" />
+  <script>
+    input.set("mynum", 2024)
+  </script>
+
+          
+        
+          
+            
+  <hgroup>
+    <h4>My String</h4>
+    <p>A string to be echoed back.</p>
+  </hgroup>
+  <input type="text" name="mystr" id="mystr" placeholder="Hello World! We have " aria-label="Text" onchange="render()" />
+  <script>
+    input.set("mystr", `Hello World! We have `)
+  </script>
+
+          
+        
+          
+            
+  <h4>Show Extras</h4>
+  <fieldset>
+    <label for="mybool">
+      <input name="mybool" id="mybool" value="mybool" type="checkbox" role="switch" onchange="render()" checked />
+      Check this if you want to see a helicopter.
+    </label>
+  </fieldset>
+  <script>
+    input.set("mybool", true)
+    bool.add("mybool")
+  </script>
+
+          
+        
+          
+            
+  <hgroup>
+    <h4>Position</h4>
+    <p>Where do you want the helicopter?</p>
+  </hgroup>
+  <fieldset>
+  
+      <label for="flying">
+        <input type="radio" name="mychoice" id=flying onchange="render()"  />
+        Flying - The helicopter will be flying.
+    </label>
+  
+      <label for="landed">
+        <input type="radio" name="mychoice" id=landed onchange="render()" checked />
+        Landed - The helicopter will be landed.
+    </label>
+  
+      <label for="distant">
+        <input type="radio" name="mychoice" id=distant onchange="render()"  />
+        Distant - The helicopter is far away.
+    </label>
+  
+      <label for="hidden">
+        <input type="radio" name="mychoice" id=hidden onchange="render()"  />
+        Hidden - The helicopter is hidden.
+    </label>
+  
+  </fieldset>
+  <script>
+    input.set("mychoice", "landed")
+    radio.add("mychoice")
+  </script>
+
+          
+        
+      </form>
+
+      <h4>Instructions</h4>
+      <div>
+        <pre>
+          <Code id="output"></Code>
+        </pre>
+      </div>
+      <button id="copybtn" class="secondary" onclick="copy_to_clipboard()" style="width: 100%;">Copy</button>
+
+    </main>
+    <footer class="container">
+      <small>
+        <p>
+          This website was generated using 
+          <a href="https://github.com/instructions-d-installation/web-installation-instruction" class="secondary">web-installation-instruction</a>, 
+          which is under 
+          <a href="https://github.com/instructions-d-installation/web-installation-instruction/blob/main/LICENSE" class="secondary">Apache-2.0</a>,
+          and utilizes 
+          <a href="https://picocss.com/" class="secondary">Pico CSS</a>, licensed under 
+          <a href="https://github.com/picocss/pico/blob/main/LICENSE.md" class="secondary">MIT</a>, and
+          <a href="https://mozilla.github.io/nunjucks/" class="secondary">Nunjucks</a>, licensed under
+          <a href="https://github.com/mozilla/nunjucks/blob/master/LICENSE" class="secondary">BSD-2-Clause</a>.
+        </p>
+      </small>
+    </footer>
+
+    <script>
+      nunjucks.configure({ autoescape: true, trimBlocks: true, lstripBlocks: true });
+      nunjucks.installJinjaCompat()
+
+      const raise_regex = /\[\[ERROR\]\](.*?)\[\[\/ERROR\]\]/g;
+
+      
+      const raise_macro = "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}";
+      
+
+      let template = nunjucks.compile(raise_macro + `{{ mystr }} {{ mynum }}
+
+{% if mybool %}
+  {% if mychoice == "flying" %}
+                                                                                         00000      
+                                                                                    00000           
+                00                                                             00000                
+                  00000000                                                 00000                    
+                          0000000                                     00000                         
+                                   00000                         000000                             
+                                            000              00                                     
+                                                   00 0000000                                       
+                                                000 000  0      00000000000000                      
+                                        000     0 000000 0000                      0000000000000    
+                               00000          000000 0 000   0000                                   
+                       000000                00    0 0000       0000000000                          
+   0   000 00                            00    00000    00  000 000  0000000                        
+        000000                            0 00000 00 000000000000  000    00000                     
+         0   00                         0000000  0 0000 0000000  000 000000     00 0000             
+         0000000                      0000 0   0 0000000  0   000000000 000 00000000000             
+          0  0 00                    00 00  000  0000000000 0000  0 0  0  000000000000              
+          000000000               000 00 0 00 0000   000  0  0 00 0000000000000000                  
+           000 00  0          000   0 0 00 00000 0000 0 000000000000000 000 00 0                    
+          00000  00 0    00000      00000000000000 00000000000 000000 000000000                     
+          0 00000 0   00    000 0000000  0    00 00000000000000000000000    0000                    
+         0000000000000000000000000  000000000000 00000000000000       00                            
+         0 000000 00000000000000     0000000000000 00    0                                          
+        000  0000  0000 00      00000          00 0                                                 
+         000    00000            00000         0          000                                       
+            0000000               000                     00              
+
+
+  {% elif mychoice == "landed" %}
+    {% raw %}
+█████████████████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███████████████████
+████▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█████████▓█▓▓▓
+▓▓▓▓▓▓▓▓▓▒▓▒▒▒▓▓▓▓▒▓▓▒▓▓▓▓▓▓▒▒▒▓▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▒▓▓▒▓▒▒▒▒▒▒▒▒▓▓▓▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▓▒▒▒▒▓▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░▒░░░░░░░▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒░░░▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒
+▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒░░░░░░░░░░▒▒▒▒▒▒░▒▒░░░▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░
+▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒▓░░░░░░░▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░
+▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░▓░░░░░░▒█████▓█░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒░░▒▒▒▒░▒░
+░░▒░░░▒▒░░░░░░░░░░░░░░░░░░░░▒░░░░░░░███████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░████░░█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░▓██▓▓░░░░█░░░░░█░░░░█░█░░░░░░██░░░░░░░░░░░░▓▓▒░░░░░░░░░░░░░░░░░
+░░░░░██░░░░░░░░░░░░░░░░░░░░░█░░░░░░░░░▒░░░░░░░░░░░░░░░░░▓█▓░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░█████░░░▓▓███▒░▓▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░██▓▓█████▓░█▒░▓▓▓█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓▓▓██████▓▒█▓▒░░░░█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓████████░▓▓█████▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░████████████▓▓██████████▓░████░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░▒███▓▓░██▓███▓░▓█▓████████████░▓█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░█▓█▒▓███▓██████▓██▒██░░█░░████░░░░░░░░░░░░░░░░▓░░░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░██▒█▓████░░░░███░████░░░░░░░░░░▓█▒░▓█░█░░░▓██▓░░░░░░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░█░░▓▓░██░░░░░░░░▒███░▒▓▓▓▓▓▓▓▓▓▓██▓██▓█▓▓▓▓▓██▓██▓▓▓▓▓
+▓▓▓▓▒▓▒▓▓▒░▓▓▓▒▓▒▓▒▒▒▒▒▓▓▒▓▒▒▒▒▒▒▒░▒▒▒░░▒░▒▒░░░▒░░░░░░▒░░▒▒░░▒▒░▒▒▒▒▒▒▒▒▒▓▓▓▒▓▓▓▓▓
+▓▓▓▒▓▓▓▓▓▓░▒▒▒▒▒▓▒▓▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▒▒▒▓▓▓▓▓▓▓▓▒▓▓
+▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒▒░░░░▒░░░░░░░░░░░▒░░▒▒░░▒░▒▒▒▒░▒▒▒░░▒▒▒▒▒▓▒▓▓▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▒▓▓▓▓▓▓▓▒▓▒▒▒▒▒▒▒▒░▒▒▒▒░░▒░░░▒▒▒░▒▒▒▒░░░▒░▒▒░▒░▒░░░▒░▒▒▒▒▒▒▒▒▒▓▒▓▓▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▓▒░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓▓▓
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▓▒▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░▒▒░▒▒▒░░▒▒░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓
+
+    {% endraw %}
+  {% elif mychoice == "distant" %}
+    {% raw %}
+
+
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                       ≠≠π   √                                       
+                                                    π=≠=≠∞                                           
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+                                                                                                     
+√ππ                                                                                                  
+√√∞√√√∞πππ π ππ                                                                                      
+∞∞∞∞∞∞∞∞∞∞∞∞∞√√√√√√√√√√√√√√ ππ                                                                       
+∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞√√√√√√√√√√√√√√√∞√√√√√√√√π√√π                                                       
+∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞∞√∞∞√∞√√√∞∞√ππππ                                            
+    {% endraw %}
+  {% else %}
+    {{ raise("Ups, this is an error message from within the template!") }}
+  {% endif %}
+{% endif %}`);
+
+      let default_input = structuredClone(input);
+
+      let output;
+
+      function render() {
+        for (const key of input.keys()) {
+          let val;
+          if (radio.has(key)) {
+            val = document.querySelector(`input[name="${key}"]:checked`).id;
+          } else if (bool.has(key)) {
+            val = document.getElementById(key).checked
+          } else {
+            val = document.getElementById(key).value || default_input.get(key);
+          }
+          input.set(key, val);
+        }
+        output = template.render(Object.fromEntries(input.entries()));
+        let errmsg = raise_regex.exec(output)?.[1];
+        output = errmsg || output;
+        document.getElementById("output").innerHTML = output;
+
+        let copy_btn = document.getElementById("copybtn");
+        if (errmsg) {
+          copy_btn.setAttribute("disabled", "disabled");
+        } else {
+          copy_btn.removeAttribute("disabled");
+        }
+      }
+
+      function copy_to_clipboard() {
+        navigator.clipboard.writeText(output);
+      }
+
+      render()
+    </script>
+
+  </body>
+</html>
