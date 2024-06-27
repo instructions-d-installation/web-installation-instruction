@@ -39,9 +39,3 @@ ibi-build-html = "web_installation_instruction.__main__:run_cli"
 Repository = "https://github.com/instructions-d-installation/web-installation-instruction"
 Issues = "https://github.com/instructions-d-installation/web-installation-instruction/issues"
 Changelog = "https://github.com/instructions-d-installation/web-installation-instruction/blob/main/CHANGELOG.md"
-
-
-[tool.setuptools]
-packages = [
-    "web_installation_instruction",
-]

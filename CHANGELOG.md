@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Added `raise` macro for template.
+* Added release github workflow for pypi.
 
 
 ### Changed
