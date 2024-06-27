@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Compile Webpage
     steps:
+      - uses: actions/checkout@v4
       - name: Compile Webpage
         uses: instructions-d-installation/web-installation-instruction-action@v0.1.0
       - name: Deploy Webpage
