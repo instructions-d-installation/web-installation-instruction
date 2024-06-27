@@ -19,7 +19,7 @@ authors = [
     { name = "Kanushka Gupta" },
     { name = "Timo Ege", email = "timoege@online.de" },
 ]
-version = "0.1.0"
+version = "0.2.0"
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
 classifiers = [
@@ -34,3 +34,14 @@ dependencies = [
 ]
 [project.scripts]
 ibi-build-html = "web_installation_instruction.__main__:run_cli"
+
+[project.urls]
+Repository = "https://github.com/instructions-d-installation/web-installation-instruction"
+Issues = "https://github.com/instructions-d-installation/web-installation-instruction/issues"
+Changelog = "https://github.com/instructions-d-installation/web-installation-instruction/blob/main/CHANGELOG.md"
+
+
+[tool.setuptools]
+packages = [
+    "web_installation_instruction",
+]
