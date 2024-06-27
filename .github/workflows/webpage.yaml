@@ -8,6 +8,9 @@ on:
       - "install.cfg"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   webpage:
     runs-on: ubuntu-latest
@@ -17,8 +20,7 @@ jobs:
       - name: Compile Webpage
         uses: instructions-d-installation/web-installation-instruction-action@v0.1.0
       - name: Deploy Webpage
-        uses: peaceiris/actions-gh-pages@v4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          folder: ./public
           
