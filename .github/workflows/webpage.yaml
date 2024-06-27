@@ -22,17 +22,17 @@ jobs:
         shell: bash
         run: echo "CONFIG_FILE_CHANGED=${{ steps.changed-files.outputs.any_changed }}" >> $GITHUB_ENV
     
-    compile_webpage:
-      runs-on: ubuntu-latest
-      name: Compile Webpage
-      needs: config_changed
-      if: env.CONFIG_FILE_CHANGED
-      steps:
-        - name: Compile Webpage
-          uses: instructions-d-installation/web-installation-instruction-action@0.1.0
-        - name: Deploy Webpage
-          uses: peaceiris/actions-gh-pages@v4
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./public
+  compile_webpage:
+    runs-on: ubuntu-latest
+    name: Compile Webpage
+    needs: config_changed
+    if: env.CONFIG_FILE_CHANGED
+    steps:
+      - name: Compile Webpage
+        uses: instructions-d-installation/web-installation-instruction-action@0.1.0
+      - name: Deploy Webpage
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
           
