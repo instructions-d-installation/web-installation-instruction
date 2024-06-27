@@ -22,7 +22,7 @@ jobs:
         shell: bash
         run: echo "CONFIG_FILE_CHANGED=${{ steps.changed-files.outputs.any_changed }}" >> $GITHUB_ENV
     
-    compile-webpage:
+    compile_webpage:
       runs-on: ubuntu-latest
       name: Compile Webpage
       needs: config_changed
