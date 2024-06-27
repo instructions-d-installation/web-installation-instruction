@@ -26,11 +26,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Compile Webpage
     needs: config_changed
-    if: env.CONFIG_FILE_CHANGED
     steps:
       - name: Compile Webpage
+        if: env.CONFIG_FILE_CHANGED
         uses: instructions-d-installation/web-installation-instruction-action@0.1.0
       - name: Deploy Webpage
+        if: env.CONFIG_FILE_CHANGED
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
