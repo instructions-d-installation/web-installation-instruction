@@ -4,6 +4,9 @@
 
 **Tool rendering html page from install.cfg file.**
 
+![PyPI - Version](https://img.shields.io/pypi/v/web-installation-instruction)
+![PyPI - License](https://img.shields.io/pypi/l/web-installation-instruction)
+
 </div>
 
 ## Usage
