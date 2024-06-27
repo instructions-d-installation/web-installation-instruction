@@ -1,0 +1,38 @@
+name: Webpage
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  config_changed:
+    runs-on: ubuntu-latest
+    name: Check for Change in Config File
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: install.cfg
+      - name: Check for Config File
+        shell: bash
+        run: echo "CONFIG_FILE_CHANGED=${{ steps.changed-files.outputs.any_changed }}" >> $GITHUB_ENV
+    
+    compile-webpage:
+      runs-on: ubuntu-latest
+      name: Compile Webpage
+      needs: config_changed
+      if: env.CONFIG_FILE_CHANGED
+      steps:
+        - name: Compile Webpage
+          uses: instructions-d-installation/web-installation-instruction-action@0.1.0
+        - name: Deploy Webpage
+          uses: peaceiris/actions-gh-pages@v4
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./public
+          
