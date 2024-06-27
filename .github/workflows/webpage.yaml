@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "install.cfg"
+  workflow_dispatch:
 
 jobs:
   webpage:
@@ -13,7 +14,7 @@ jobs:
     name: Compile Webpage
     steps:
       - name: Compile Webpage
-        uses: instructions-d-installation/web-installation-instruction-action@0.1.0
+        uses: instructions-d-installation/web-installation-instruction-action@v0.1.0
       - name: Deploy Webpage
         uses: peaceiris/actions-gh-pages@v4
         with:
