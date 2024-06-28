@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* Added warning color to erroneous render output.
+* Added automatic default for operating systems.
+
+
+### Fixed
+
+* Fixed failed rendering on empty default.
 
 
 ## [0.2.1] - 2024-06-27
