@@ -114,6 +114,37 @@
 
           
         
+          
+            
+  <hgroup>
+    <h4>OS</h4>
+    <p>Your operating system. (Only Windows, MacOS and Linux are detectable.)</p>
+  </hgroup>
+  <fieldset>
+  
+      <label for="win">
+        <input type="radio" name="__os__" id=win onchange="render()"  />
+        Windows 10+ - 
+    </label>
+  
+      <label for="linux">
+        <input type="radio" name="__os__" id=linux onchange="render()"  />
+        GNU/Linux - 
+    </label>
+  
+      <label for="openbsd">
+        <input type="radio" name="__os__" id=openbsd onchange="render()"  />
+        OpenBSD - 
+    </label>
+  
+  </fieldset>
+  <script>
+    input.set("__os__", "None")
+    radio.add("__os__")
+  </script>
+
+          
+        
       </form>
 
       <h4>Instructions</h4>
@@ -152,6 +183,8 @@
       
 
       let template = nunjucks.compile(raise_macro + `{{ mystr }} {{ mynum }}
+
+Your os is {{ __os__ }}?
 
 {% if mybool %}
   {% if mychoice == "flying" %}
