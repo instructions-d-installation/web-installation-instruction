@@ -32,9 +32,12 @@
     <script src="https://cdn.jsdelivr.net/npm/nunjucks@3/browser/nunjucks.min.js"></script>
 
     <script>
+      "use strict";
+
       let input = new Map();
       let radio = new Set();
       let bool = new Set();
+      let availableEnumValues = new Map();
     </script>
 
   </head>
@@ -75,7 +78,7 @@
           <Code id="output"></Code>
         </pre>
       </div>
-      <button id="copybtn" class="secondary" onclick="copy_to_clipboard()" style="width: 100%;">Copy</button>
+      <button id="copybtn" class="secondary" onclick="copyToClipboard()" style="width: 100%;">Copy</button>
 
     </main>
     <footer class="container">
@@ -98,19 +101,32 @@
       nunjucks.configure({ autoescape: true, trimBlocks: true, lstripBlocks: true });
       nunjucks.installJinjaCompat()
 
-      const raise_regex = /\[\[ERROR\]\](.*?)\[\[\/ERROR\]\]/g;
+      const raiseRegex = /\[\[ERROR\]\](.*?)\[\[\/ERROR\]\]/g;
 
       {% raw %}
-      const raise_macro = "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}";
+      const raiseMacro = "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}";
       {% endraw %}
 
-      let template = nunjucks.compile(raise_macro + `{{ __web_template__ }}`);
+      let template = nunjucks.compile(raiseMacro + `{{ __web_template__ }}`);
 
-      let default_input = structuredClone(input);
+      if (input.has("__os__")) {
+        let defaultOS = input.get("__os__");
+        if (defaultOS === "None") {
+          defaultOS = null;
+        }
+        let availableOS = availableEnumValues.get("__os__");
+        let realOS = null;
+        if (availableOS) {
+          realOS = getOS(availableOS);
+        }
+        input.set("__os__", realOS ?? defaultOS);
+      }
 
-      let copy_btn = document.getElementById("copybtn");
-      let output_elem = document.getElementById("output");
-      let output_default_style = output_elem.style.getPropertyValue("--pico-code-color");
+      let defaultInput = structuredClone(input);
+
+      let copyBtn = document.getElementById("copybtn");
+      let outputElem = document.getElementById("output");
+      let outputDefaultStyle = outputElem.style.getPropertyValue("--pico-code-color");
       let output;
 
       function render() {
@@ -118,29 +134,49 @@
           let val;
           if (radio.has(key)) {
             val = document.querySelector(`input[name="${key}"]:checked`)?.id;
+            if (!val && input.get(key)) {
+              document.getElementById(input.get(key)).checked = true;
+            }
           } else if (bool.has(key)) {
             val = document.getElementById(key)?.checked
           } else {
-            val = document.getElementById(key)?.value || default_input.get(key);
+            val = document.getElementById(key)?.value || defaultInput.get(key);
           }
           input.set(key, val);
         }
         output = template.render(Object.fromEntries(input.entries()));
-        let errmsg = raise_regex.exec(output)?.[1];
+        let errmsg = raiseRegex.exec(output)?.[1];
         output = errmsg || output;
-        output_elem.innerHTML = output;
+        outputElem.innerHTML = output;
 
         if (errmsg) {
-          copy_btn.setAttribute("disabled", "disabled");
-          output_elem.style.setProperty("--pico-code-color", "#ff6700");
+          copyBtn.setAttribute("disabled", "disabled");
+          outputElem.style.setProperty("--pico-code-color", "#ff6700");
         } else {
-          copy_btn.removeAttribute("disabled");
-          output_elem.style.setProperty("--pico-code-color", output_default_style);
+          copyBtn.removeAttribute("disabled");
+          outputElem.style.setProperty("--pico-code-color", outputDefaultStyle);
         }
       }
 
-      function copy_to_clipboard() {
+      function copyToClipboard() {
         navigator.clipboard.writeText(output);
+      }
+
+      function getOS(availableOS) {
+        let userAgent = navigator.userAgent.toLowerCase();
+        let supportedOS = {
+          win: /.*windows.*/g,
+          linux: /.*linux.*/g,
+          mac: /.*macintosh.*/g
+        };
+        
+        for (const os in supportedOS) {
+          if (supportedOS[os].test(userAgent) && availableOS.includes(os)) {
+            return os;
+          }
+        }
+
+        return null;
       }
 
       render()

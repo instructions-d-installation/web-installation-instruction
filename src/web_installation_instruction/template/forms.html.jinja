@@ -16,16 +16,22 @@
 #}
 
 {% macro radio(prop) %}
+  <script>
+    availableEnumValues.set("{{ prop.key }}", []);
+  </script>
   <hgroup>
     <h4>{{ prop.title }}</h4>
     <p>{{ prop.description }}</p>
   </hgroup>
   <fieldset>
   {% for elem in prop.enum %}
-      <label for="{{ elem.key }}">
-        <input type="radio" name="{{ prop.key }}" id={{ elem.key }} onchange="render()" {{ "checked" if prop.default == elem.key }} />
-        {{ elem.title}} - {{ elem.description }}
+    <label for="{{ elem.key }}">
+      <input type="radio" name="{{ prop.key }}" id={{ elem.key }} onchange="render()" {{ "checked" if prop.default == elem.key }} />
+      {{ elem.title}} - {{ elem.description }}
     </label>
+    <script>
+      availableEnumValues.set("{{ prop.key }}", [...availableEnumValues.get("{{ prop.key }}"), "{{ elem.key }}"]);
+    </script>
   {% endfor %}
   </fieldset>
   <script>
