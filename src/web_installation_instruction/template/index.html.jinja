@@ -108,6 +108,9 @@
 
       let default_input = structuredClone(input);
 
+      let copy_btn = document.getElementById("copybtn");
+      let output_elem = document.getElementById("output");
+      let output_default_style = output_elem.style.getPropertyValue("--pico-code-color");
       let output;
 
       function render() {
@@ -125,13 +128,14 @@
         output = template.render(Object.fromEntries(input.entries()));
         let errmsg = raise_regex.exec(output)?.[1];
         output = errmsg || output;
-        document.getElementById("output").innerHTML = output;
+        output_elem.innerHTML = output;
 
-        let copy_btn = document.getElementById("copybtn");
         if (errmsg) {
           copy_btn.setAttribute("disabled", "disabled");
+          output_elem.style.setProperty("--pico-code-color", "#ff6700");
         } else {
           copy_btn.removeAttribute("disabled");
+          output_elem.style.setProperty("--pico-code-color", output_default_style);
         }
       }
 
