@@ -129,6 +129,9 @@
       let outputDefaultStyle = outputElem.style.getPropertyValue("--pico-code-color");
       let output;
 
+      render()
+
+
       function render() {
         for (const key of input.keys()) {
           let val;
@@ -136,6 +139,7 @@
             val = document.querySelector(`input[name="${key}"]:checked`)?.id;
             if (!val && input.get(key)) {
               document.getElementById(input.get(key)).checked = true;
+              val = input.get(key);
             }
           } else if (bool.has(key)) {
             val = document.getElementById(key)?.checked
@@ -178,8 +182,6 @@
 
         return null;
       }
-
-      render()
     </script>
 
   </body>
