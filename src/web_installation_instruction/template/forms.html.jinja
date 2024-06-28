@@ -27,7 +27,7 @@
   {% for elem in prop.enum %}
     <label for="{{ elem.key }}">
       <input type="radio" name="{{ prop.key }}" id={{ elem.key }} onchange="render()" {{ "checked" if prop.default == elem.key }} />
-      {{ elem.title}} - {{ elem.description }}
+      {{ elem.title}} {{ "-" if elem.description }} {{ elem.description }}
     </label>
     <script>
       availableEnumValues.set("{{ prop.key }}", [...availableEnumValues.get("{{ prop.key }}"), "{{ elem.key }}"]);

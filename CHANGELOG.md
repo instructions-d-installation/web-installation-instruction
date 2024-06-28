@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added automatic default for operating systems.
 
 
+### Changed
+
+* Delimiter in radios is now only shown, when a description exists.
+
+
 ### Fixed
 
 * Fixed failed rendering on empty default.
