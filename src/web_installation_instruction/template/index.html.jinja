@@ -116,8 +116,9 @@
         }
         let availableOS = availableEnumValues.get("__os__");
         let realOS = null;
-        if (availableOS) {
-          realOS = getOS(availableOS);
+        realOS = getOS();
+        if (!availableOS.includes(realOS)) {
+          realOS = null;
         }
         input.set("__os__", realOS ?? defaultOS);
       }
@@ -166,7 +167,7 @@
         navigator.clipboard.writeText(output);
       }
 
-      function getOS(availableOS) {
+      function getOS() {
         let userAgent = navigator.userAgent.toLowerCase();
         let supportedOS = {
           android: /.*android.*/g,
@@ -179,7 +180,7 @@
         };
         
         for (const os in supportedOS) {
-          if (supportedOS[os].test(userAgent) && availableOS.includes(os)) {
+          if (supportedOS[os].test(userAgent)) {
             return os;
           }
         }

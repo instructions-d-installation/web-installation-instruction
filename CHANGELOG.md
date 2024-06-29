@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Added
+
+* Added more os being detected by default detection of `__os__`.
+
+
+## Changed
+
+* Switched to longer os names: `windows`, `linux`, `macos`.
+
 
 ## [0.3.1] - 2024-06-28
 
