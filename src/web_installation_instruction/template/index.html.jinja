@@ -169,9 +169,13 @@
       function getOS(availableOS) {
         let userAgent = navigator.userAgent.toLowerCase();
         let supportedOS = {
-          win: /.*windows.*/g,
+          android: /.*android.*/g,
+          ios: /.*iphone.*/g,
+          windows: /.*windows.*/g,
           linux: /.*linux.*/g,
-          mac: /.*macintosh.*/g
+          macos: /.*macintosh.*/g,
+          openbsd: /.*openbsd.*/g,
+          freebsd: /.*freebsd.*/g
         };
         
         for (const os in supportedOS) {

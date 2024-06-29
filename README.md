@@ -29,6 +29,22 @@
 
 Take a look at [web-installation-instruction-action](https://github.com/instructions-d-installation/web-installation-instruction-action).
 
+## Automatic Defaults
+
+You must have such property in your schema and have some of the options below (take those that you actually support):
+
+```yaml
+__os__:
+  - android
+  - ios
+  - windows
+  - linux
+  - macos
+  - openbsd
+  - freebsd
+```
+
+
 ## Example
 
 [![example](./pictures/example.png)](https://instructions-d-installation.github.io/web-installation-instruction)
