@@ -107,20 +107,30 @@
       const raiseMacro = "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}";
       {% endraw %}
 
-      let template = nunjucks.compile(raiseMacro + `{{ __web_template__ }}`);
+      const template = nunjucks.compile(raiseMacro + `{{ __web_template__ }}`);
 
-      if (input.has("__os__")) {
-        let defaultOS = input.get("__os__");
-        if (defaultOS === "None") {
-          defaultOS = null;
+
+      const defaultProperties = {
+        "__os__": getOS
+      };
+
+      for (const [property, defaultGetter] of Object.entries(defaultProperties)) {
+        let defaultValue = input.get(property);
+        if (defaultValue === "None") {
+          defaultValue = null;
         }
-        let availableOS = availableEnumValues.get("__os__");
-        let realOS = null;
-        realOS = getOS();
-        if (!availableOS.includes(realOS)) {
-          realOS = null;
+
+        let availableValues = availableEnumValues.get(property);
+        let realValue = defaultGetter();
+        if (!availableValues.includes(realValue)) {
+          realValue = null;
         }
-        input.set("__os__", realOS ?? defaultOS);
+        let resultValue = realValue ?? defaultValue;
+        input.set(property, resultValue)
+
+        if (resultValue) {
+          document.getElementById(resultValue).checked = true;
+        }
       }
 
       let defaultInput = structuredClone(input);
@@ -138,10 +148,6 @@
           let val;
           if (radio.has(key)) {
             val = document.querySelector(`input[name="${key}"]:checked`)?.id;
-            if (!val && input.get(key)) {
-              document.getElementById(input.get(key)).checked = true;
-              val = input.get(key);
-            }
           } else if (bool.has(key)) {
             val = document.getElementById(key)?.checked
           } else {
@@ -168,8 +174,8 @@
       }
 
       function getOS() {
-        let userAgent = navigator.userAgent.toLowerCase();
-        let supportedOS = {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const supportedOS = {
           android: /.*android.*/g,
           ios: /.*iphone.*/g,
           windows: /.*windows.*/g,
