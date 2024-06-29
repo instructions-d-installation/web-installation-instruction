@@ -83,48 +83,77 @@
         
           
             
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
   <script>
     availableEnumValues.set("mychoice", []);
   </script>
+
   <hgroup>
     <h4>Position</h4>
     <p>Where do you want the helicopter?</p>
   </hgroup>
   <fieldset>
-  
-    <label for="flying">
-      <input type="radio" name="mychoice" id=flying onchange="render()"  />
-      Flying - The helicopter will be flying.
-    </label>
-    <script>
-      availableEnumValues.set("mychoice", [...availableEnumValues.get("mychoice"), "flying"]);
-    </script>
-  
-    <label for="landed">
-      <input type="radio" name="mychoice" id=landed onchange="render()" checked />
-      Landed - The helicopter will be landed.
-    </label>
-    <script>
-      availableEnumValues.set("mychoice", [...availableEnumValues.get("mychoice"), "landed"]);
-    </script>
-  
-    <label for="distant">
-      <input type="radio" name="mychoice" id=distant onchange="render()"  />
-      Distant - The helicopter is far away.
-    </label>
-    <script>
-      availableEnumValues.set("mychoice", [...availableEnumValues.get("mychoice"), "distant"]);
-    </script>
-  
-    <label for="hidden">
-      <input type="radio" name="mychoice" id=hidden onchange="render()"  />
-      Hidden - The helicopter is hidden.
-    </label>
-    <script>
-      availableEnumValues.set("mychoice", [...availableEnumValues.get("mychoice"), "hidden"]);
-    </script>
-  
+    
+      
+      <label for="flying">
+      
+        <input type="radio" name="mychoice" id=flying onchange="render()"  />
+      
+        Flying - The helicopter will be flying.
+      </label>
+
+      <script>
+        availableEnumValues.set("mychoice", [...availableEnumValues.get("mychoice"), "flying"]);
+      </script>
+    
+      
+      <label for="landed">
+      
+        <input type="radio" name="mychoice" id=landed onchange="render()" checked />
+      
+        Landed - The helicopter will be landed.
+      </label>
+
+      <script>
+        availableEnumValues.set("mychoice", [...availableEnumValues.get("mychoice"), "landed"]);
+      </script>
+    
+      
+      <label for="distant">
+      
+        <input type="radio" name="mychoice" id=distant onchange="render()"  />
+      
+        Distant - The helicopter is far away.
+      </label>
+
+      <script>
+        availableEnumValues.set("mychoice", [...availableEnumValues.get("mychoice"), "distant"]);
+      </script>
+    
+      
+      <label for="hidden">
+      
+        <input type="radio" name="mychoice" id=hidden onchange="render()"  />
+      
+        Hidden - The helicopter is hidden.
+      </label>
+
+      <script>
+        availableEnumValues.set("mychoice", [...availableEnumValues.get("mychoice"), "hidden"]);
+      </script>
+    
   </fieldset>
+
   <script>
     input.set("mychoice", "landed")
     radio.add("mychoice")
@@ -134,80 +163,133 @@
         
           
             
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
   <script>
     availableEnumValues.set("__os__", []);
   </script>
+
   <hgroup>
     <h4>OS</h4>
     <p>Your operating system (TempleOS is not being detected).</p>
   </hgroup>
   <fieldset>
-  
-    <label for="windows">
-      <input type="radio" name="__os__" id=windows onchange="render()"  />
-      Windows 10+  
-    </label>
-    <script>
-      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "windows"]);
-    </script>
-  
-    <label for="linux">
-      <input type="radio" name="__os__" id=linux onchange="render()"  />
-      GNU/Linux  
-    </label>
-    <script>
-      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "linux"]);
-    </script>
-  
-    <label for="macos">
-      <input type="radio" name="__os__" id=macos onchange="render()"  />
-      MacOS  
-    </label>
-    <script>
-      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "macos"]);
-    </script>
-  
-    <label for="openbsd">
-      <input type="radio" name="__os__" id=openbsd onchange="render()"  />
-      OpenBSD  
-    </label>
-    <script>
-      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "openbsd"]);
-    </script>
-  
-    <label for="freebsd">
-      <input type="radio" name="__os__" id=freebsd onchange="render()"  />
-      FreeBSD  
-    </label>
-    <script>
-      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "freebsd"]);
-    </script>
-  
-    <label for="android">
-      <input type="radio" name="__os__" id=android onchange="render()"  />
-      Android  
-    </label>
-    <script>
-      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "android"]);
-    </script>
-  
-    <label for="ios">
-      <input type="radio" name="__os__" id=ios onchange="render()"  />
-      IOS  
-    </label>
-    <script>
-      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "ios"]);
-    </script>
-  
-    <label for="templeos">
-      <input type="radio" name="__os__" id=templeos onchange="render()"  />
-      TempleOS  
-    </label>
-    <script>
-      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "templeos"]);
-    </script>
-  
+    
+      
+        <input type="radio" name="__os__" id=windows onchange="render()"  />
+      
+      <label for="windows">
+      
+        Windows 10+  
+      </label>
+
+      <script>
+        availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "windows"]);
+      </script>
+    
+      
+        <input type="radio" name="__os__" id=linux onchange="render()"  />
+      
+      <label for="linux">
+      
+        GNU/Linux  
+      </label>
+
+      <script>
+        availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "linux"]);
+      </script>
+    
+      
+        <input type="radio" name="__os__" id=macos onchange="render()"  />
+      
+      <label for="macos">
+      
+        MacOS  
+      </label>
+
+      <script>
+        availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "macos"]);
+      </script>
+    
+      
+        <input type="radio" name="__os__" id=openbsd onchange="render()"  />
+      
+      <label for="openbsd">
+      
+        OpenBSD  
+      </label>
+
+      <script>
+        availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "openbsd"]);
+      </script>
+    
+      
+        <input type="radio" name="__os__" id=freebsd onchange="render()"  />
+      
+      <label for="freebsd">
+      
+        FreeBSD  
+      </label>
+
+      <script>
+        availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "freebsd"]);
+      </script>
+    
+      
+        <input type="radio" name="__os__" id=android onchange="render()"  />
+      
+      <label for="android">
+      
+        Android  
+      </label>
+
+      <script>
+        availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "android"]);
+      </script>
+    
+      
+        <input type="radio" name="__os__" id=ios onchange="render()"  />
+      
+      <label for="ios">
+      
+        IOS  
+      </label>
+
+      <script>
+        availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "ios"]);
+      </script>
+    
+      
+        <input type="radio" name="__os__" id=templeos onchange="render()"  />
+      
+      <label for="templeos">
+      
+        TempleOS  
+      </label>
+
+      <script>
+        availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "templeos"]);
+      </script>
+    
   </fieldset>
+
   <script>
     input.set("__os__", "None")
     radio.add("__os__")
@@ -252,7 +334,7 @@
       const raiseMacro = "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}";
       
 
-      let template = nunjucks.compile(raiseMacro + `{{ mystr }} {{ mynum }}
+      const template = nunjucks.compile(raiseMacro + `{{ mystr }} {{ mynum }}
 
 Your os is {{ __os__ }}?
 
@@ -358,17 +440,28 @@ Your os is {{ __os__ }}?
   {% endif %}
 {% endif %}`);
 
-      if (input.has("__os__")) {
-        let defaultOS = input.get("__os__");
-        if (defaultOS === "None") {
-          defaultOS = null;
+
+      const defaultProperties = {
+        "__os__": getOS
+      };
+
+      for (const [property, defaultGetter] of Object.entries(defaultProperties)) {
+        let defaultValue = input.get(property);
+        if (defaultValue === "None") {
+          defaultValue = null;
         }
-        let availableOS = availableEnumValues.get("__os__");
-        let realOS = null;
-        if (availableOS) {
-          realOS = getOS(availableOS);
+
+        let availableValues = availableEnumValues.get(property);
+        let realValue = defaultGetter();
+        if (!availableValues.includes(realValue)) {
+          realValue = null;
         }
-        input.set("__os__", realOS ?? defaultOS);
+        let resultValue = realValue ?? defaultValue;
+        input.set(property, resultValue)
+
+        if (resultValue) {
+          document.getElementById(resultValue).checked = true;
+        }
       }
 
       let defaultInput = structuredClone(input);
@@ -386,10 +479,6 @@ Your os is {{ __os__ }}?
           let val;
           if (radio.has(key)) {
             val = document.querySelector(`input[name="${key}"]:checked`)?.id;
-            if (!val && input.get(key)) {
-              document.getElementById(input.get(key)).checked = true;
-              val = input.get(key);
-            }
           } else if (bool.has(key)) {
             val = document.getElementById(key)?.checked
           } else {
@@ -415,16 +504,20 @@ Your os is {{ __os__ }}?
         navigator.clipboard.writeText(output);
       }
 
-      function getOS(availableOS) {
-        let userAgent = navigator.userAgent.toLowerCase();
-        let supportedOS = {
-          win: /.*windows.*/g,
+      function getOS() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const supportedOS = {
+          android: /.*android.*/g,
+          ios: /.*iphone.*/g,
+          windows: /.*windows.*/g,
           linux: /.*linux.*/g,
-          mac: /.*macintosh.*/g
+          macos: /.*macintosh.*/g,
+          openbsd: /.*openbsd.*/g,
+          freebsd: /.*freebsd.*/g
         };
         
         for (const os in supportedOS) {
-          if (supportedOS[os].test(userAgent) && availableOS.includes(os)) {
+          if (supportedOS[os].test(userAgent)) {
             return os;
           }
         }
