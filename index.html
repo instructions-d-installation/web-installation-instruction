@@ -139,16 +139,16 @@
   </script>
   <hgroup>
     <h4>OS</h4>
-    <p>Your operating system. (Only Windows, MacOS and Linux are detectable.)</p>
+    <p>Your operating system (TempleOS is not being detected).</p>
   </hgroup>
   <fieldset>
   
-    <label for="win">
-      <input type="radio" name="__os__" id=win onchange="render()"  />
+    <label for="windows">
+      <input type="radio" name="__os__" id=windows onchange="render()"  />
       Windows 10+  
     </label>
     <script>
-      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "win"]);
+      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "windows"]);
     </script>
   
     <label for="linux">
@@ -159,12 +159,52 @@
       availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "linux"]);
     </script>
   
+    <label for="macos">
+      <input type="radio" name="__os__" id=macos onchange="render()"  />
+      MacOS  
+    </label>
+    <script>
+      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "macos"]);
+    </script>
+  
     <label for="openbsd">
       <input type="radio" name="__os__" id=openbsd onchange="render()"  />
       OpenBSD  
     </label>
     <script>
       availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "openbsd"]);
+    </script>
+  
+    <label for="freebsd">
+      <input type="radio" name="__os__" id=freebsd onchange="render()"  />
+      FreeBSD  
+    </label>
+    <script>
+      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "freebsd"]);
+    </script>
+  
+    <label for="android">
+      <input type="radio" name="__os__" id=android onchange="render()"  />
+      Android  
+    </label>
+    <script>
+      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "android"]);
+    </script>
+  
+    <label for="ios">
+      <input type="radio" name="__os__" id=ios onchange="render()"  />
+      IOS  
+    </label>
+    <script>
+      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "ios"]);
+    </script>
+  
+    <label for="templeos">
+      <input type="radio" name="__os__" id=templeos onchange="render()"  />
+      TempleOS  
+    </label>
+    <script>
+      availableEnumValues.set("__os__", [...availableEnumValues.get("__os__"), "templeos"]);
     </script>
   
   </fieldset>
