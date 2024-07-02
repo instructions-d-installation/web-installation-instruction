@@ -101,7 +101,7 @@
       nunjucks.configure({ autoescape: true, trimBlocks: true, lstripBlocks: true });
       nunjucks.installJinjaCompat()
 
-      const raiseRegex = /\[\[ERROR\]\](.*?)\[\[\/ERROR\]\]/g;
+      const raiseRegex = /\[\[ERROR\]\](?<err>.*?)\[\[\/ERROR\]\]/;
 
       {% raw %}
       const raiseMacro = "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}";
@@ -156,7 +156,7 @@
           input.set(key, val);
         }
         output = template.render(Object.fromEntries(input.entries()));
-        let errmsg = raiseRegex.exec(output)?.[1];
+        let errmsg = output.match(raiseRegex)?.[1];
         output = errmsg || output;
         outputElem.innerHTML = output;
 
