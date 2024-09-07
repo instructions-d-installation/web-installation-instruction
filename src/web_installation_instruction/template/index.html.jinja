@@ -102,12 +102,20 @@
       nunjucks.installJinjaCompat()
 
       const raiseRegex = /\[\[ERROR\]\](?<err>.*?)\[\[\/ERROR\]\]/;
+      const whitespaceRegex = /\s{2,}/;
 
       {% raw %}
-      const raiseMacro = "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}";
+      const macros = [
+        "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}",
+        `{% macro command() %}
+            {% filter replace("\n", "") %}
+                {{ caller() }}
+            {% endfilter %} 
+        {% endmacro %}`
+      ];
       {% endraw %}
 
-      const template = nunjucks.compile(raiseMacro + `{{ __web_template__ }}`);
+      const template = nunjucks.compile(macros.join("\n") + `{{ __web_template__ }}`);
 
 
       const defaultProperties = {
@@ -158,7 +166,18 @@
         output = template.render(Object.fromEntries(input.entries()));
         let errmsg = output.match(raiseRegex)?.[1];
         output = errmsg || output;
-        outputElem.innerHTML = output;
+
+        let outputArray = output.split("\n");
+        let resultArray = [];
+
+        for (var i = 0; i < outputArray.length; i++) {
+          let resultLine = outputArray[i].trim().replace(whitespaceRegex, " ");
+          if (resultLine) {
+            resultArray.push(resultLine);
+          }
+        }
+
+        outputElem.innerHTML = resultArray.join("\n");
 
         if (errmsg) {
           copyBtn.setAttribute("disabled", "disabled");
