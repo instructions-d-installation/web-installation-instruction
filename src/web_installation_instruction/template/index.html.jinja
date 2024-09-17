@@ -108,7 +108,7 @@
       const macros = [
         "{% macro raise(error) %} [[ERROR]]{{ error }}[[/ERROR]] {% endmacro %}",
         `{% macro command() %}
-            {% filter replace("\n", "") %}
+            {% filter replace("\n", " ") %}
                 {{ caller() }}
             {% endfilter %} 
         {% endmacro %}`
