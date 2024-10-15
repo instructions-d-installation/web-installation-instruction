@@ -19,7 +19,7 @@ authors = [
     { name = "Kanushka Gupta" },
     { name = "Timo Ege", email = "timoege@online.de" },
 ]
-version = "0.5.1"
+version = "0.5.2"
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
 classifiers = [
