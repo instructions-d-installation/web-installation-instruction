@@ -49,6 +49,7 @@ def main(
         config_string = f.read()
 
     (_, template) = _split_string_at_delimiter(config_string)
+    template.replace("`", "'")
     install = InstallationInstruction(config_string)
     schema = install.parse_schema()
     schema["__web_template__"] = template
